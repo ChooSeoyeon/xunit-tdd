@@ -9,8 +9,9 @@ public class TestCaseTest extends TestCase {
     // 이전에 작성한 테스트코드를 테스트메소드로 만듦
     public void testRunning() {
         WasRun wasRun = new WasRun("testMethod");
-        System.out.println(wasRun.wasRun); // false
+        // assert wasRun.wasRun == false;
+        Assert.assertEquals(false, wasRun.wasRun); // 기댓값, 실제값
         wasRun.run();
-        System.out.println(wasRun.wasRun); // true
+        Assert.assertEquals(true, wasRun.wasRun); // 기댓값, 실제값
     }
 }
