@@ -3,8 +3,9 @@ package xunit;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-// WasRun은 하나의 테스트일 뿐이고,
-// 일반화된 테스트 케이스에 적용할 수 있는 공통적인 내용 뽑아서 추상화된 형태로 만든 것
+// 일반화된 테스트케이스
+// WasRun은 하나의 테스트케이스일 뿐이고,
+// 일반화된 테스트케이스에 적용할 수 있는 공통적인 내용 뽑아서 추상화된 형태로 만든 것
 // name, run() 가져옴
 public class TestCase {
     protected final String name; // 실행할 테스트 메소드 이름
@@ -15,6 +16,8 @@ public class TestCase {
 
     // 생성자 인자로 받은 이름을 가지고 테스트 메소드 실행함
     public void run() {
+        setUp(); // testMethod 호출하기 전에 항상 호출함
+
         // 특정 method를 dynamic하게 실행시키는 코드 (동적인 프로그래밍 언어와 달리 자바는 이가 조금 복잡함)
         try {
             Method method = getClass().getMethod(name); // 이름을 가지고 method를 찾음.
@@ -29,5 +32,9 @@ public class TestCase {
             // 이름이 실제로 존재하는건지 알 수 없기에 각종 exception들 발생함.
             throw new RuntimeException(e); // wrapping만 해서 던지게 해줌
         }
+    }
+
+    // 테스트케이스는 매번 이름이 달라지지만 setUp은 모든 testcase에서 동일한 이름 사용하고 싶음
+    public void setUp() {
     }
 }

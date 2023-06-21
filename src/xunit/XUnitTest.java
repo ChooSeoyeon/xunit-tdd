@@ -4,10 +4,10 @@ package xunit;
 public class XUnitTest {
     public static void main(String[] args) {
 
-        // (테스트 클래스 안에 들어있는) 테스트 메소드 실행됐는지 체크하는 테스트
         /*
-         리팩토링 #1 - 테스트 기능 손대지 않고 동일한 결과 나오게 코드 개선(중복 제거)
+         (테스트 클래스 안에 들어있는) 테스트 메소드 실행됐는지 체크하는 테스트
 
+         리팩토링 #1 - 테스트 기능 손대지 않고 동일한 결과 나오게 코드 개선(중복 제거)
          테스트 메소드는 이름을 테스트할 때 WasRun에 만들고 싶은거고,
          사실은 어떤 클래스의 이름이 뭐든 간에 테스트 메소드엔 의미 있는 이름 부여해주는 게 좋음
          따라서 wasRun.run() 이라 하면 테스트 메소드가 실행되면 좋겠음
@@ -26,8 +26,15 @@ public class XUnitTest {
 
         /*
         리팩토링 #3 - 테스트를 테스트하는 테스트 일반화
-        main문 내부에 있던 코드들을 테스트케이스를 상속한 테스트로 만들자.
+        main문 내부에 있던 테스트 케이스를 테스트하는 테스트코드를 테스트케이스를 상속한 테스트로 만들자.
         */
-        new TestCaseTest("testRunning").run();
+        new TestCaseTest("testRunning").run(); // 테스트 하나하나마다 새로운 object 만들어짐.
+
+        /*
+        테스트코드를 어떤 method 하나에 담는데 앞에 초기화 넣고, 뒤에 정리하는 거 넣고 할 수도 있지만
+        가능하면 이를 분리시켜놓고 더 의미있게 코드 관리하는 게 좋음
+        따라서  setUp이나 tearDown, beforeEach, afterEach 같은거 만들어서 씀
+        */
+        new TestCaseTest("testSetUp").run();
     }
 }
