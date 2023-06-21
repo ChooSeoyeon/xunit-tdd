@@ -38,5 +38,9 @@ public class XUnitTest {
         따라서  setUp이나 tearDown, beforeEach, afterEach 같은거 만들어서 씀
         */
         new TestCaseTest("testSetUp").run();
+
+        /*
+        리팩토링 #2.1 - 중복 제거
+        */
     }
 }
